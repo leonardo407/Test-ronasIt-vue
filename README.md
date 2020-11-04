@@ -1,5 +1,7 @@
 # test-ronasit-vue
 
+[Link to api](https://openweathermap.org/api)
+
 ## Project setup
 ```
 npm install
