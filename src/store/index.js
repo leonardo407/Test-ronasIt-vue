@@ -5,7 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    city: 'Krasnodar',
+    cityCoords: {
+      lat: 45.0328,
+      lon: 38.9769,
+    },
     API_KEY: '799b31d237458c762b4ea6d23f2e5d1c',
     units: 'metric',
     weatherData: {},
@@ -31,11 +34,7 @@ export default new Vuex.Store({
 
       try {
         const res = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast/daily?
-          q=${state.city}
-          &lang=ru
-          &appid=${state.API_KEY}
-          &units=${state.units}`,
+          `https://api.openweathermap.org/data/2.5/weather?lat=${state.cityCoords.lat}&lon=${state.cityCoords.lon}&appid=${state.API_KEY}&units=${state.units}&lang=ru`,
         )
         const data = await res.json()
 

@@ -8,8 +8,12 @@
         <div>
           <h2>{{weatherData.name}}</h2>
 
-          <div class="d-flex align-items-center">
-            <p class="opacity">Сменить город</p>
+          <div class="header-bottom d-flex align-items-center">
+            <p class="header-change-city opacity"
+               @click="changeCity"
+            >
+              Сменить город
+            </p>
 
             <div class="header-location d-flex align-items-center" @click="getPosition">
               <img src="@/assets/img/location.svg" alt="">
@@ -54,8 +58,8 @@
       <div class="middle d-flex align-items-center justify-content-center">
         <div>
           <div class="d-flex align-items-center">
-            <img src="@/assets/img/cloudy.svg" alt="">
-            <h1>{{weatherData.main.temp}}º</h1>
+            <img :src="`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`" alt="">
+            <h1>{{Math.round(weatherData.main.temp)}}º</h1>
           </div>
 
           <h4 class="middle-description">{{weatherData.weather[0].description}}</h4>
@@ -78,10 +82,10 @@
           <h4 class="footer-value">{{weatherData.main.humidity}}%</h4>
         </div>
 
-        <!--        <div>-->
-        <!--          <p class="opacity">Вероятность дождя</p>-->
-        <!--          <h4 class="footer-value">10%</h4>-->
-        <!--        </div>-->
+        <div>
+          <p class="opacity">Вероятность дождя</p>
+          <h4 class="footer-value">{{weatherData.clouds.all}}%</h4>
+        </div>
       </div>
     </div>
   </div>
@@ -141,7 +145,13 @@
 
             this.fetchWeatherData()
           },
+          error => {
+            console.log(error)
+          },
         )
+      },
+      changeCity() {
+        console.log('ss')
       },
     },
     mounted() {
@@ -163,6 +173,14 @@
 
   .header {
     margin-top: 75px;
+
+    &-bottom {
+      margin-top: 9px;
+    }
+
+    &-change-city {
+      cursor: pointer;
+    }
 
     &-location {
       cursor: pointer;
